@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tcc_2021/screens/user/cronograma_page.dart';
 import 'package:tcc_2021/screens/user/history_page.dart';
 import 'package:tcc_2021/screens/user/home_page.dart';
+import 'package:tcc_2021/screens/user/minha_conta_page.dart';
 
 // ignore: must_be_immutable
 class TabsPage extends StatefulWidget {
@@ -65,7 +67,11 @@ class _TabsPageState extends State<TabsPage> {
               title: Text('Minha Conta'),
               trailing: Icon(Icons.account_circle),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MinhaConta(),
+                  ),
+                );
               },
             ),
             Divider(
@@ -75,7 +81,11 @@ class _TabsPageState extends State<TabsPage> {
               title: Text('Cronograma'),
               trailing: Icon(Icons.calendar_today_outlined),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CronogramaListPage(),
+                  ),
+                );
               },
             ),
             Divider(

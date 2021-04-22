@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc_2021/components/alerts.dart';
 import 'package:tcc_2021/components/default_text_field.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
+import 'package:tcc_2021/screens/user/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class LoginPageState extends State<LoginPage> {
   bool showProgressFacebook = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   // UserWebClient _webClient = UserWebClient();
   // final facebookLogin = FacebookLogin();
 
@@ -38,6 +40,23 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            "Login",
+            style: TextStyle(color: Color(0xFF6EB0ED)),
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+      ),
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -49,16 +68,7 @@ class LoginPageState extends State<LoginPage> {
         ),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 120),
-            Container(
-              child: Container(
-                child: Image.asset(
-                  'images/logo2.png',
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-            ),
+            SizedBox(height: 220),
             Container(
               padding: EdgeInsets.all(10),
               child: DefaultTextFieldProfile('E-mail', emailController, TextInputType.text, status),
@@ -197,9 +207,9 @@ class LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //   builder: (context) => SignUpPage(),
-                      // ));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SignUpPage(),
+                      ));
                     },
                   )
                 ],

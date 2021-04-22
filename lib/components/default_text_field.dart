@@ -79,3 +79,44 @@ class DefaultTextFieldProfile extends StatelessWidget {
     );
   }
 }
+
+// ignore: must_be_immutable
+class DefaultTextFieldProfileBlack extends StatelessWidget {
+  String dica;
+  TextInputType type;
+  bool status;
+  MaskTextInputFormatter maskFormatter;
+  TextEditingController controller = TextEditingController();
+
+  DefaultTextFieldProfileBlack(this.dica, this.controller, this.type, this.status,
+      {this.maskFormatter});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: TextField(
+        inputFormatters: maskFormatter != null ? [maskFormatter] : null,
+        controller: controller,
+        style: TextStyle(color: Colors.blue),
+        keyboardType: type,
+        enabled: status,
+        minLines: 1,
+        maxLines: 25,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.lightBlueAccent),
+          ),
+          labelStyle: TextStyle(color: Colors.black87),
+          labelText: dica,
+        ),
+      ),
+    );
+  }
+}
