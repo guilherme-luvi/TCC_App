@@ -50,11 +50,16 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/home-background.png
+    - images/health-background.png
     - images/login-background.png
     - images/vacinacao.png
     - images/user.png
     - images/ready.png
     - images/waiting.png
+    - images/drop-health.png
+    - images/foods-health.png
+    - images/vaccine-health.png
+    - images/protection-health.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

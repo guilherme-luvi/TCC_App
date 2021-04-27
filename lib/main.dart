@@ -10,7 +10,7 @@ class TicketSpree extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      home: TabsPage(1),
+      home: TabsPage(0),
     );
   }
 }

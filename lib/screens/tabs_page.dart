@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_2021/screens/user/cronograma_page.dart';
+import 'package:tcc_2021/screens/user/health_page.dart';
 import 'package:tcc_2021/screens/user/history_page.dart';
 import 'package:tcc_2021/screens/user/home_page.dart';
 import 'package:tcc_2021/screens/user/minha_conta_page.dart';
@@ -164,7 +165,7 @@ class TabNavigationItem {
           title: "Início",
         ),
         TabNavigationItem(
-          page: HomePage(),
+          page: HealthPage(),
           icon: Icon(Icons.favorite),
           title: "Saúde",
         ),
