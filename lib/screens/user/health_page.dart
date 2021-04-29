@@ -86,16 +86,19 @@ class HealthPageState extends State<HealthPage> {
               Positioned(
                 top: 280,
                 right: 40,
-                child: Container(
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
-                    border: Border.all(color: Colors.black, width: 2),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("Verifique \naqui seu \nIMC", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500), textAlign: TextAlign.center),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: Container(
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                      border: Border.all(color: Colors.black, width: 2),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Verifique \naqui seu \nIMC", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500), textAlign: TextAlign.center),
+                    ),
                   ),
                 ),
               ),

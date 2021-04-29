@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:tcc_2021/screens/user/questionary_menu_page.dart';
 import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -95,7 +95,7 @@ class HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => LoginPage(),
+                      builder: (context) => QuestionaryMenu(),
                     ),
                   );
                 },
