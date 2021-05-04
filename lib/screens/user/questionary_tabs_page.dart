@@ -90,28 +90,22 @@ class QuestionaryTabsState extends State<QuestionaryTabs> {
                 ),
                 Center(
                   child: Container(
+                    padding: const EdgeInsets.all(6.0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 2, color: Colors.lightBlueAccent),
+                      ),
+                    ),
                     width: 150,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Continuar ',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          Image.asset('images/drag.png', width: 25)
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // background
-                        onPrimary: Colors.lightBlueAccent,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                        side: BorderSide(
-                          width: 2.0,
-                          color: Colors.lightBlueAccent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Continuar ',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                         ),
-                      ),
+                        Image.asset('images/drag.png', width: 25)
+                      ],
                     ),
                   ),
                 ),
