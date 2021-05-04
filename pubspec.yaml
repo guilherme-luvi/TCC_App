@@ -27,6 +27,7 @@ dependencies:
   mask_text_input_formatter: ^1.1.0
   flutter_staggered_animations: ^1.0.0
   flutter_speed_dial: ^3.0.5
+  pie_chart:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +63,7 @@ flutter:
     - images/protection-health.png
     - images/calc.png
     - images/questionary.png
+    - images/drag.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

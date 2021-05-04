@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc_2021/screens/user/result_page.dart';
 
 class QuestionaryTabs extends StatefulWidget {
   @override
@@ -88,19 +89,28 @@ class QuestionaryTabsState extends State<QuestionaryTabs> {
                   ),
                 ),
                 Center(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Próxima etapa',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white, // background
-                      onPrimary: Colors.lightBlueAccent,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                      side: BorderSide(
-                        width: 2.0,
-                        color: Colors.lightBlueAccent,
+                  child: Container(
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Continuar ',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Image.asset('images/drag.png', width: 25)
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white, // background
+                        onPrimary: Colors.lightBlueAccent,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        side: BorderSide(
+                          width: 2.0,
+                          color: Colors.lightBlueAccent,
+                        ),
                       ),
                     ),
                   ),
@@ -149,7 +159,13 @@ class QuestionaryTabsState extends State<QuestionaryTabs> {
                 ),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => ResultPage()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
                     child: Text(
                       'Gerar resultado',
                       style: TextStyle(fontSize: 18),
