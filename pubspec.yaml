@@ -28,6 +28,7 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   flutter_speed_dial: ^3.0.5
   pie_chart:
+  emojis: ^0.9.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -52,7 +53,6 @@ flutter:
   assets:
     - images/home-background.png
     - images/health-background.png
-    - images/login-background.png
     - images/vacinacao.png
     - images/user.png
     - images/ready.png
@@ -64,6 +64,10 @@ flutter:
     - images/calc.png
     - images/questionary.png
     - images/drag.png
+    - images/logo1.png
+    - images/logo2.png
+    - images/logo3.png
+    - images/logo4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

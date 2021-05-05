@@ -60,15 +60,12 @@ class LoginPageState extends State<LoginPage> {
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
-            image: AssetImage("images/login-background.png"),
-            fit: BoxFit.cover,
-          ),
+          color: Color(0xFF222222),
         ),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 220),
+            SizedBox(height: 20),
+            Container(height: 200, child: Image.asset('images/logo2.png')),
             Container(
               padding: EdgeInsets.all(10),
               child: DefaultTextFieldProfile('E-mail', emailController, TextInputType.text, status),

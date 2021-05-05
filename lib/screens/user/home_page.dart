@@ -32,7 +32,9 @@ class HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 130),
+            SizedBox(height: 120),
+            Text('Ultimas notícias', style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500)),
+            SizedBox(height: 10),
             CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
@@ -80,14 +82,9 @@ class HomePageState extends State<HomePage> {
                   )
                   .toList(),
             ),
-            SizedBox(height: 100),
-            Container(
-              child: Text(
-                "Logo do app aqui!",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 26),
-              ),
-            ),
-            SizedBox(height: 100),
+            SizedBox(height: 50),
+            Container(height: 200, child: Image.asset('images/logo2.png')),
+            SizedBox(height: 40),
             Container(
               width: 200,
               height: 50,
@@ -99,7 +96,7 @@ class HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                icon: Icon(Icons.add_circle_outline),
+                icon: Image.asset('images/logo3.png', width: 30),
                 label: Text('Realizar Diagnóstico'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white, // background

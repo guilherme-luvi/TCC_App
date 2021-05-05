@@ -1,9 +1,11 @@
+import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_2021/screens/user/cronograma_page.dart';
 import 'package:tcc_2021/screens/user/health_page.dart';
 import 'package:tcc_2021/screens/user/history_page.dart';
 import 'package:tcc_2021/screens/user/home_page.dart';
+import 'package:tcc_2021/screens/user/login_page.dart';
 import 'package:tcc_2021/screens/user/minha_conta_page.dart';
 
 // ignore: must_be_immutable
@@ -18,6 +20,7 @@ class TabsPage extends StatefulWidget {
 
 class _TabsPageState extends State<TabsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool _isLogged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +36,14 @@ class _TabsPageState extends State<TabsPage> {
         child: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
-          title: Text(
-            "Brazil Health",
-            style: TextStyle(color: Color(0xFF6EB0ED)),
+          title: Row(
+            children: [
+              Image.asset('images/logo3.png', width: 40,),
+              Text(
+                "Diagnostico plus",
+                style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w300),
+              ),
+            ],
           ),
           leading: IconButton(
             icon: Icon(
@@ -46,85 +54,182 @@ class _TabsPageState extends State<TabsPage> {
           ),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("Nilesh Rathod"),
-              accountEmail: Text("nilesh@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Image.asset('images/user.png'),
+      drawer: _isLogged
+          ? Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(color: Color(0xFF222222)),
+                    accountName: Text("Guilherme Luvizute", style: TextStyle(color: Colors.lightBlueAccent, fontSize: 16)),
+                    accountEmail: Text("luvizute@gmail.com", style: TextStyle(color: Colors.blueGrey)),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Image.asset('images/user.png'),
+                    ),
+                    otherAccountsPictures: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.logout, color: Colors.blue),
+                      ),
+                    ],
+                  ),
+                  ListTile(
+                    title: Text('Minha Conta'),
+                    trailing: Icon(Icons.account_circle),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MinhaConta(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Cronograma'),
+                    trailing: Icon(Icons.calendar_today_outlined),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CronogramaListPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Locais e Mapas'),
+                    trailing: Icon(Icons.location_on),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Contato'),
+                    trailing: Icon(Icons.add_call),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Dúvidas frequentes'),
+                    trailing: Icon(Icons.question_answer_outlined),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                ],
               ),
-              otherAccountsPictures: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person_add),
-                ),
-              ],
-            ),
-            ListTile(
-              title: Text('Minha Conta'),
-              trailing: Icon(Icons.account_circle),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => MinhaConta(),
+            )
+          : Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  DrawerHeader(
+                    decoration: BoxDecoration(color: Color(0xFF222222)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('images/logo3.png', width: 90),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF222222), // background
+                            onPrimary: Colors.lightBlueAccent,
+                            side: BorderSide(
+                              width: 1,
+                              color: Colors.lightBlueAccent,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-            ListTile(
-              title: Text('Cronograma'),
-              trailing: Icon(Icons.calendar_today_outlined),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CronogramaListPage(),
+                  ListTile(
+                    title: Text('Minha Conta'),
+                    trailing: Icon(Icons.account_circle),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MinhaConta(),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Cronograma'),
+                    trailing: Icon(Icons.calendar_today_outlined),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CronogramaListPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Locais e Mapas'),
+                    trailing: Icon(Icons.location_on),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Contato'),
+                    trailing: Icon(Icons.add_call),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                  ListTile(
+                    title: Text('Dúvidas frequentes'),
+                    trailing: Icon(Icons.question_answer_outlined),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Divider(
+                    color: Colors.blueGrey,
+                  ),
+                ],
+              ),
             ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-            ListTile(
-              title: Text('Locais e Mapas'),
-              trailing: Icon(Icons.location_on),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-            ListTile(
-              title: Text('Contato'),
-              trailing: Icon(Icons.add_call),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-            ListTile(
-              title: Text('Sair'),
-              trailing: Icon(Icons.logout),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Divider(
-              color: Colors.blueGrey,
-            ),
-          ],
-        ),
-      ),
       body: TabNavigationItem.items[widget._currentIndex].page,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

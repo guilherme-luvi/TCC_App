@@ -101,10 +101,10 @@ class QuestionaryTabsState extends State<QuestionaryTabs> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Continuar ',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                          'Deslize ',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
                         ),
-                        Image.asset('images/drag.png', width: 25)
+                        Image.asset('images/drag.png', width: 35)
                       ],
                     ),
                   ),

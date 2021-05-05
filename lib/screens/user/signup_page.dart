@@ -43,23 +43,18 @@ class _State extends State<SignUpPage> {
         ),
       ),
       body: Container(
-        color: Colors.white70,
+        color: Color(0xFF222222),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 30),
-            Center(
-                child: Text(
-              "Brazil Health",
-              style: TextStyle(color: Color(0xFF6EB0ED), fontSize: 28, fontWeight: FontWeight.w400),
-            )),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
+            Container(height: 100, child: Image.asset('images/logo2.png')),
             Container(
               padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfileBlack('Nome Completo', nameController, TextInputType.text, status),
+              child: DefaultTextFieldProfile('Nome Completo', nameController, TextInputType.text, status),
             ),
             Container(
               padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfileBlack('E-mail', emailController, TextInputType.text, status),
+              child: DefaultTextFieldProfile('E-mail', emailController, TextInputType.text, status),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -68,20 +63,20 @@ class _State extends State<SignUpPage> {
                 child: TextField(
                   obscureText: !this._showPassword,
                   controller: passwordController,
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: Colors.white70),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Senha',
-                    labelStyle: TextStyle(color: Colors.black87),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                      borderSide: BorderSide(color: Colors.white54),
                     ),
                     disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                      borderSide: BorderSide(color: Colors.blueGrey),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.lightBlueAccent),
+                      borderSide: BorderSide(color: Colors.white),
                     ),
+                    labelStyle: TextStyle(color: Colors.white),
                     suffixIcon: IconButton(
                       icon: Icon(
                         Icons.remove_red_eye,
@@ -97,11 +92,11 @@ class _State extends State<SignUpPage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfileBlack('Nascimento', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
+              child: DefaultTextFieldProfile('Nascimento', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
             ),
             Container(
               padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfileBlack(
+              child: DefaultTextFieldProfile(
                 'CPF',
                 documentController,
                 TextInputType.phone,

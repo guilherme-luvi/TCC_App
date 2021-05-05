@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:tcc_2021/components/centered_message.dart';
 
 class HistoryListPage extends StatefulWidget {
   @override
