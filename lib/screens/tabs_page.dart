@@ -2,6 +2,7 @@ import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_2021/screens/user/cronograma_page.dart';
+import 'package:tcc_2021/screens/user/doubts_page.dart';
 import 'package:tcc_2021/screens/user/health_page.dart';
 import 'package:tcc_2021/screens/user/history_page.dart';
 import 'package:tcc_2021/screens/user/home_page.dart';
@@ -20,7 +21,7 @@ class TabsPage extends StatefulWidget {
 
 class _TabsPageState extends State<TabsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  bool _isLogged = false;
+  bool _isLogged = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +127,11 @@ class _TabsPageState extends State<TabsPage> {
                     title: Text('Dúvidas frequentes'),
                     trailing: Icon(Icons.question_answer_outlined),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DoubtsPage(),
+                        ),
+                      );
                     },
                   ),
                   Divider(
@@ -168,34 +173,6 @@ class _TabsPageState extends State<TabsPage> {
                         ),
                       ],
                     ),
-                  ),
-                  ListTile(
-                    title: Text('Minha Conta'),
-                    trailing: Icon(Icons.account_circle),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => MinhaConta(),
-                        ),
-                      );
-                    },
-                  ),
-                  Divider(
-                    color: Colors.blueGrey,
-                  ),
-                  ListTile(
-                    title: Text('Cronograma'),
-                    trailing: Icon(Icons.calendar_today_outlined),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CronogramaListPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  Divider(
-                    color: Colors.blueGrey,
                   ),
                   ListTile(
                     title: Text('Locais e Mapas'),
