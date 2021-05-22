@@ -1,6 +1,6 @@
-import 'package:emojis/emojis.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tcc_2021/main.dart';
 import 'package:tcc_2021/screens/user/cronograma_page.dart';
 import 'package:tcc_2021/screens/user/doubts_page.dart';
 import 'package:tcc_2021/screens/user/health_page.dart';
@@ -21,7 +21,7 @@ class TabsPage extends StatefulWidget {
 
 class _TabsPageState extends State<TabsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  bool _isLogged = true;
+  bool _isLogged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,10 @@ class _TabsPageState extends State<TabsPage> {
           centerTitle: true,
           title: Row(
             children: [
-              Image.asset('images/logo3.png', width: 40,),
+              Image.asset(
+                'images/logo3.png',
+                width: 40,
+              ),
               Text(
                 "Diagnostico plus",
                 style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w300),
@@ -51,7 +54,19 @@ class _TabsPageState extends State<TabsPage> {
               Icons.menu_rounded,
               color: Colors.black,
             ),
-            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+            onPressed: () async {
+              var token = await storage.read(key: "jwt");
+              if (token == null) {
+                setState(() {
+                  _isLogged = false;
+                });
+              } else {
+                setState(() {
+                  _isLogged = true;
+                });
+              }
+              _scaffoldKey.currentState.openDrawer();
+            },
           ),
         ),
       ),
@@ -69,9 +84,19 @@ class _TabsPageState extends State<TabsPage> {
                       child: Image.asset('images/user.png'),
                     ),
                     otherAccountsPictures: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.logout, color: Colors.blue),
+                      GestureDetector(
+                        onTap: () async {
+                          await storage.deleteAll();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TabsPage(0),
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(Icons.logout, color: Colors.blue),
+                        ),
                       ),
                     ],
                   ),

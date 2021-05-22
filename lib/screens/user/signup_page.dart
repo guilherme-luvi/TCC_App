@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:tcc_2021/components/alerts.dart';
 import 'package:tcc_2021/components/default_text_field.dart';
+import 'package:tcc_2021/http/webclients/user_webclient.dart';
+import 'package:tcc_2021/screens/tabs_page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -13,14 +14,15 @@ class _State extends State<SignUpPage> {
   bool _showPassword = false;
   bool showProgress = false;
 
-  // UserWebClient _webClient = UserWebClient();
+  UserWebClient _webClient = UserWebClient();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController documentController = TextEditingController();
-  TextEditingController birthdayController = TextEditingController();
-  var maskFormatterCPF = new MaskTextInputFormatter(mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
-  var maskFormatterBirthDate = new MaskTextInputFormatter(mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')});
+  TextEditingController confirmController = TextEditingController();
+
+  // TextEditingController birthdayController = TextEditingController();
+  // var maskFormatterCPF = new MaskTextInputFormatter(mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
+  // var maskFormatterBirthDate = new MaskTextInputFormatter(mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
@@ -91,19 +93,53 @@ class _State extends State<SignUpPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfile('Nascimento', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: DefaultTextFieldProfile(
-                'CPF',
-                documentController,
-                TextInputType.phone,
-                status,
-                maskFormatter: maskFormatterCPF,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  obscureText: !this._showPassword,
+                  controller: confirmController,
+                  style: TextStyle(color: Colors.white70),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Confirmar senha',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white54),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    labelStyle: TextStyle(color: Colors.white),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.remove_red_eye,
+                        color: this._showPassword ? Colors.blue : Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() => this._showPassword = !this._showPassword);
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   child: DefaultTextFieldProfile('Nascimento', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
+            // ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   child: DefaultTextFieldProfile(
+            //     'CPF',
+            //     documentController,
+            //     TextInputType.phone,
+            //     status,
+            //     maskFormatter: maskFormatterCPF,
+            //   ),
+            // ),
             Container(
               height: 70,
               padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
@@ -120,35 +156,35 @@ class _State extends State<SignUpPage> {
                   final name = nameController.text;
                   final email = emailController.text;
                   final senha = passwordController.text;
-                  final nascimento = birthdayController.text;
-                  final documento = documentController.text;
+                  final confirm = confirmController.text;
 
-                  if (name.isEmpty || email.isEmpty || senha.isEmpty || nascimento.isEmpty || documento.isEmpty) {
+                  if (name.isEmpty || email.isEmpty || senha.isEmpty || confirm.isEmpty) {
                     showAlertDialog(context, 'Campos não preenchidos.');
+                  } else if (senha != confirm) {
+                    showAlertDialog(context, 'O campo de confirmação está diferente da senha.');
                   } else {
                     setState(() {
                       showProgress = true;
                     });
-                    // var resp = await _webClient.signUp(
-                    //   name,
-                    //   email,
-                    //   senha,
-                    //   nascimento,
-                    //   documento,
-                    // );
-                    // if (resp != null) {
-                    //   await _webClient.logIn(email, senha);
-                    //   Navigator.pushAndRemoveUntil(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => ProfilePage()),
-                    //     (Route<dynamic> route) => false,
-                    //   );
-                    // } else {
-                    //   setState(() {
-                    //     showProgress = false;
-                    //   });
-                    //   showAlertDialog(context, 'E-mail já cadastrado.');
-                    // }
+
+                    var resp = await _webClient.signUp(
+                      name,
+                      email,
+                      senha,
+                    );
+                    if (resp != null) {
+                      await _webClient.logIn(email, senha);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => TabsPage(0)),
+                        (Route<dynamic> route) => false,
+                      );
+                    } else {
+                      setState(() {
+                        showProgress = false;
+                      });
+                      showAlertDialog(context, 'E-mail já cadastrado.');
+                    }
                   }
                 },
               ),

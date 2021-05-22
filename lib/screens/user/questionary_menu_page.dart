@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_2021/screens/user/questionary_tabs_page.dart';
+import 'package:tcc_2021/screens/user/questionary_page.dart';
 
 class QuestionaryMenu extends StatefulWidget {
   @override
@@ -46,7 +46,7 @@ class QuestionaryMenuState extends State<QuestionaryMenu> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => QuestionaryTabs(),
+                      builder: (context) => QuestionaryPage(),
                     ),
                   );
                 },
