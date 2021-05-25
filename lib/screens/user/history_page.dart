@@ -158,12 +158,13 @@ class _HistoryListPageState extends State<HistoryListPage> {
                             builder: (context) => QuestionaryMenu(),
                           ),
                         );
+                      } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(1),
+                          ),
+                        );
                       }
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(1),
-                        ),
-                      );
                     },
                     child: Text(
                       'Clique aqui',

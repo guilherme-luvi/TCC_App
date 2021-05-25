@@ -135,12 +135,13 @@ class LoginPageState extends State<LoginPage> {
                           MaterialPageRoute(builder: (context) => TabsPage(0)),
                           (Route<dynamic> route) => false,
                         );
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => QuestionaryMenu()),
+                          (Route<dynamic> route) => false,
+                        );
                       }
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => QuestionaryMenu()),
-                        (Route<dynamic> route) => false,
-                      );
                     } else {
                       showAlertDialog(context, 'Usuário ou senha inválidos.');
                     }
