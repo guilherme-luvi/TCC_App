@@ -8,7 +8,7 @@ class SintomasWebClient {
   Future<List<Sintoma>> sintomas() async {
     var token = await storage.read(key: "jwt");
     final Response resp = await client.get(
-      Uri.https(baseUrl, 'Sintomas'),
+      Uri.https(baseUrl, 'api/Sintomas'),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

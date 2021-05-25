@@ -5,9 +5,14 @@ import 'package:tcc_2021/components/alerts.dart';
 import 'package:tcc_2021/components/default_text_field.dart';
 import 'package:tcc_2021/http/webclients/user_webclient.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
+import 'package:tcc_2021/screens/user/questionary_menu_page.dart';
 import 'package:tcc_2021/screens/user/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
+  final int direction;
+
+  LoginPage(this.direction);
+
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -124,9 +129,16 @@ class LoginPageState extends State<LoginPage> {
                     });
 
                     if (resp != null) {
+                      if (widget.direction == 0) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => TabsPage(0)),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => TabsPage(0)),
+                        MaterialPageRoute(builder: (context) => QuestionaryMenu()),
                         (Route<dynamic> route) => false,
                       );
                     } else {

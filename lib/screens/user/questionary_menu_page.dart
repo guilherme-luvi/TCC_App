@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc_2021/screens/tabs_page.dart';
 import 'package:tcc_2021/screens/user/questionary_page.dart';
 
 class QuestionaryMenu extends StatefulWidget {
@@ -24,7 +25,13 @@ class QuestionaryMenuState extends State<QuestionaryMenu> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => TabsPage(0)),
+                (Route<dynamic> route) => false,
+              );
+            },
           ),
         ),
       ),

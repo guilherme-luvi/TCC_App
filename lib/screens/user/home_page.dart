@@ -94,7 +94,7 @@ class HomePageState extends State<HomePage> {
                   if (token == null) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => LoginPage(1),
                       ),
                     );
                   } else {

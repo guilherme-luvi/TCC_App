@@ -1,6 +1,16 @@
+import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:intl/intl.dart';
+import 'package:tcc_2021/components/centered_message.dart';
+import 'package:tcc_2021/components/progress.dart';
+import 'package:tcc_2021/http/webclients/diagnostico_webclient.dart';
+import 'package:tcc_2021/models/diagnostico.dart';
+import 'package:tcc_2021/screens/user/login_page.dart';
+import 'package:tcc_2021/screens/user/questionary_menu_page.dart';
+
+import '../../main.dart';
 
 class HistoryListPage extends StatefulWidget {
   @override
@@ -10,6 +20,9 @@ class HistoryListPage extends StatefulWidget {
 }
 
 class _HistoryListPageState extends State<HistoryListPage> {
+  DiagnosticoWebClient _webClient = new DiagnosticoWebClient();
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,127 +67,125 @@ class _HistoryListPageState extends State<HistoryListPage> {
 
   Widget sections() {
     return Container(
-      child: AnimationLimiter(
-        child: ListView.builder(
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: Duration(milliseconds: 375),
-              child: SlideAnimation(
-                horizontalOffset: 100.0,
-                child: FadeInAnimation(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(10.0),
-                          padding: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Color(0xFF480CA8), width: 2)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Diagnóstico A",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w400, color: Color(0xFF480CA8)),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "Data 15/04/2021",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: Color(0xFF6EB0ED)),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 30.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.blue,
-                                ),
-                                height: 20,
-                                width: 100,
+      child: FutureBuilder<dynamic>(
+        future: this._memoizer.runOnce(() => _webClient.meusDiagnosticos()),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.waiting:
+              return Progress();
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              if (snapshot.hasData) {
+                final List<Diagnostico> diagnosticos = snapshot.data;
+                if (diagnosticos.isNotEmpty) {
+                  return AnimationLimiter(
+                    child: ListView.builder(
+                      itemCount: diagnosticos.length,
+                      itemBuilder: (context, index) {
+                        final diagnostico = diagnosticos[index];
+                        String dia = DateFormat('dd/MM/yyyy').format(DateTime.parse(diagnostico.data));
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: Duration(milliseconds: 375),
+                          child: SlideAnimation(
+                            horizontalOffset: 100.0,
+                            child: FadeInAnimation(
+                              child: GestureDetector(
+                                onTap: () {},
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                                    color: Colors.white,
+                                  margin: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(6.0),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Color(0xFF480CA8), width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.calendar_today_rounded, color: Colors.blue),
+                                              Text(
+                                                " $dia",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w400, color: Color(0xFF480CA8)),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Sem consulta agendada',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: Color(0xFF6EB0ED)),
+                                          ),
+                                        ],
+                                      ),
+                                      Image.asset(
+                                        'images/ready.png',
+                                        width: 50,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              Image.asset(
-                                'images/waiting.png',
-                                width: 50,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(10.0),
-                          padding: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Color(0xFF480CA8), width: 2)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Diagnóstico B",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w400, color: Color(0xFF480CA8)),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    "Data 12/04/2021",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: Color(0xFF6EB0ED)),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 100.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.blue,
-                                ),
-                                height: 20,
-                                width: 100,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Image.asset(
-                                'images/ready.png',
-                                width: 50,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
+                  );
+                }
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CenteredMessage(
+                    'Ops! Nada por aqui',
+                    icon: Icons.warning_amber_rounded,
+                    subMessage: 'Realize novos diagnósticos',
                   ),
-                ),
-              ),
-            );
-          },
-        ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () async {
+                      var token = await storage.read(key: "jwt");
+                      if (token != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => QuestionaryMenu(),
+                          ),
+                        );
+                      }
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(1),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Clique aqui',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white, // background
+                      onPrimary: Colors.lightBlueAccent,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                      side: BorderSide(
+                        width: 2.0,
+                        color: Colors.lightBlueAccent,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+              break;
+          }
+          return CenteredMessage('Unkown Error');
+        },
       ),
     );
-    // return CenteredMessage(
-    //   'Nenhum diagnóstico realizado',
-    //   icon: Icons.warning_amber_rounded,
-    //   subMessage: 'Volte a página inicial e clique em "Realizar Diagnóstico".',
-    // );
   }
 }

@@ -30,6 +30,7 @@ class _ResultPageState extends State<ResultPage> {
     Color(0xFF3A86FF),
     Color(0xFF2EC4B6),
     Color(0xFFFB5607),
+    Color(0xFFd9a20b),
   ];
 
   @override
