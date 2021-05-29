@@ -8,7 +8,7 @@ import 'package:tcc_2021/components/centered_message.dart';
 import 'package:tcc_2021/components/progress.dart';
 import 'package:tcc_2021/http/webclients/diagnostico_webclient.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
-import 'package:tcc_2021/screens/user/questionary_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/questionary_page.dart';
 
 class ResultPage extends StatefulWidget {
   List<int> sintomasIds = [];

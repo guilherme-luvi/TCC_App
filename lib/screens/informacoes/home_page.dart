@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_2021/models/noticia.dart';
-import 'package:tcc_2021/screens/user/questionary_menu_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/questionary_menu_page.dart';
 import '../../main.dart';
-import 'login_page.dart';
+import '../usuario/login_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

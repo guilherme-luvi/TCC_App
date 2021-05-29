@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
-import 'package:tcc_2021/screens/user/questionary_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/questionary_page.dart';
 
 class QuestionaryMenu extends StatefulWidget {
   @override

@@ -57,4 +57,19 @@ class DiagnosticoWebClient {
     }
     return diagnosticos;
   }
+
+  Future<bool> deletar(int diagnosticoId) async {
+    var token = await storage.read(key: "jwt");
+    final Response resp = await client.delete(Uri.https(baseUrl, 'api/Diagnosticos/$diagnosticoId'), headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    }).timeout(Duration(seconds: 15));
+
+    if (resp.statusCode != 200) {
+      return null;
+    }
+
+    return true;
+  }
 }

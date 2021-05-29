@@ -7,8 +7,9 @@ import 'package:tcc_2021/components/centered_message.dart';
 import 'package:tcc_2021/components/progress.dart';
 import 'package:tcc_2021/http/webclients/diagnostico_webclient.dart';
 import 'package:tcc_2021/models/diagnostico.dart';
-import 'package:tcc_2021/screens/user/login_page.dart';
-import 'package:tcc_2021/screens/user/questionary_menu_page.dart';
+import 'package:tcc_2021/screens/historico/history_details_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/usuario/login_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/questionary_menu_page.dart';
 
 import '../../main.dart';
 
@@ -94,12 +95,18 @@ class _HistoryListPageState extends State<HistoryListPage> {
                           child: SlideAnimation(
                             horizontalOffset: 100.0,
                             child: FadeInAnimation(
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  margin: const EdgeInsets.all(10.0),
-                                  padding: const EdgeInsets.all(6.0),
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Color(0xFF480CA8), width: 2)),
+                              child: Container(
+                                margin: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(6.0),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Color(0xFF480CA8), width: 2)),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => HistoryDetail(diagnostico),
+                                      ),
+                                    );
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [

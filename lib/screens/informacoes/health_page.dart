@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tcc_2021/screens/user/detalhes_health_page.dart';
-import 'package:tcc_2021/screens/user/imc_page.dart';
+import 'package:tcc_2021/screens/informacoes/detalhes_health_page.dart';
+import 'package:tcc_2021/screens/informacoes/imc_page.dart';
 
 class HealthPage extends StatefulWidget {
   @override

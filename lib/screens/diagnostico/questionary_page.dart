@@ -8,7 +8,7 @@ import 'package:tcc_2021/components/centered_message.dart';
 import 'package:tcc_2021/components/progress.dart';
 import 'package:tcc_2021/http/webclients/sintomas_webclient.dart';
 import 'package:tcc_2021/models/sintoma.dart';
-import 'package:tcc_2021/screens/user/result_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/result_page.dart';
 
 class QuestionaryPage extends StatefulWidget {
   @override

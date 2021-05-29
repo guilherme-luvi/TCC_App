@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tcc_2021/main.dart';
-import 'package:tcc_2021/screens/user/cronograma_page.dart';
-import 'package:tcc_2021/screens/user/doubts_page.dart';
-import 'package:tcc_2021/screens/user/health_page.dart';
-import 'package:tcc_2021/screens/user/history_page.dart';
-import 'package:tcc_2021/screens/user/home_page.dart';
-import 'package:tcc_2021/screens/user/login_page.dart';
-import 'package:tcc_2021/screens/user/minha_conta_page.dart';
+import 'package:tcc_2021/screens/informacoes/cronograma_page.dart';
+import 'package:tcc_2021/screens/informacoes/doubts_page.dart';
+import 'package:tcc_2021/screens/informacoes/health_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/historico/history_page.dart';
+import 'package:tcc_2021/screens/informacoes/home_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/usuario/login_page.dart';
+import 'file:///C:/Repos/tcc_2021/lib/screens/usuario/minha_conta_page.dart';
 
 // ignore: must_be_immutable
 class TabsPage extends StatefulWidget {
