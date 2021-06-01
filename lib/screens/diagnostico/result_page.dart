@@ -7,6 +7,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:tcc_2021/components/centered_message.dart';
 import 'package:tcc_2021/components/progress.dart';
 import 'package:tcc_2021/http/webclients/diagnostico_webclient.dart';
+import 'package:tcc_2021/screens/diagnostico/doencas_menu_page.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
 import 'file:///C:/Repos/tcc_2021/lib/screens/diagnostico/questionary_page.dart';
 
@@ -30,7 +31,7 @@ class _ResultPageState extends State<ResultPage> {
     Color(0xFF3A86FF),
     Color(0xFF2EC4B6),
     Color(0xFFFB5607),
-    Color(0xFFd9a20b),
+    Colors.yellow,
   ];
 
   @override
@@ -115,10 +116,19 @@ class _ResultPageState extends State<ResultPage> {
                           ),
                         ),
                         Center(
-                          child: Text(
-                            'Clique nas cores para maiores informações',
-                            style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.w400, fontSize: 16),
-                            textAlign: TextAlign.center,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DoencasMenu(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Clique aqui para maiores informações',
+                              style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.w400, fontSize: 16),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         SizedBox(height: 40),

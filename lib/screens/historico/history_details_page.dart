@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:tcc_2021/http/webclients/diagnostico_webclient.dart';
 import 'package:tcc_2021/models/diagnostico.dart';
+import 'package:tcc_2021/screens/diagnostico/doencas_menu_page.dart';
 import 'package:tcc_2021/screens/tabs_page.dart';
 
 class HistoryDetail extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HistoryDetailState extends State<HistoryDetail> {
     Color(0xFF3A86FF),
     Color(0xFF2EC4B6),
     Color(0xFFFB5607),
-    Color(0xFFd9a20b),
+    Colors.yellow,
   ];
 
   @override
@@ -102,10 +103,19 @@ class _HistoryDetailState extends State<HistoryDetail> {
               ),
             ),
             Center(
-              child: Text(
-                'Clique nas cores para maiores informações',
-                style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.w400, fontSize: 16),
-                textAlign: TextAlign.center,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DoencasMenu(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Clique aqui para maiores informações',
+                  style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.w400, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             SizedBox(height: 40),
