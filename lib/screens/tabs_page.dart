@@ -70,6 +70,7 @@ class _TabsPageState extends State<TabsPage> {
           ),
         ),
       ),
+      drawerEnableOpenDragGesture: false,
       drawer: _isLogged
           ? Drawer(
               child: ListView(
@@ -223,7 +224,11 @@ class _TabsPageState extends State<TabsPage> {
                     title: Text('Dúvidas frequentes'),
                     trailing: Icon(Icons.question_answer_outlined),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DoubtsPage(),
+                        ),
+                      );
                     },
                   ),
                   Divider(

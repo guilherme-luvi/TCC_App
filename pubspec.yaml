@@ -82,6 +82,7 @@ flutter:
     - images/febre.png
     - images/gripe.png
     - images/h1n1.png
+    - images/escala.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

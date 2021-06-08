@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:tcc_2021/components/default_text_field.dart';
 
 class IMC extends StatefulWidget {
@@ -9,17 +8,12 @@ class IMC extends StatefulWidget {
 
 class _IMCState extends State<IMC> {
   bool status = true;
-  bool _showPassword = false;
   bool showProgress = false;
+  String _result = "";
 
-  // UserWebClient _webClient = UserWebClient();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController documentController = TextEditingController();
-  TextEditingController birthdayController = TextEditingController();
-  var maskFormatterCPF = new MaskTextInputFormatter(mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
-  var maskFormatterBirthDate = new MaskTextInputFormatter(mask: '##/##/####', filter: {"#": RegExp(r'[0-9]')});
+  TextEditingController alturaController = TextEditingController();
+  TextEditingController pesoController = TextEditingController();
+  TextEditingController resultadoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -67,17 +61,35 @@ class _IMCState extends State<IMC> {
                       child: Row(
                         children: [
                           Flexible(
-                            child: DefaultTextFieldProfileBlack('Altura', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
+                            child: DefaultTextFieldProfileBlack('Altura (metros)', alturaController, TextInputType.datetime, status),
                           ),
                           Flexible(
-                            child: DefaultTextFieldProfileBlack('Peso', birthdayController, TextInputType.datetime, status, maskFormatter: maskFormatterBirthDate),
+                            child: DefaultTextFieldProfileBlack('Peso (Kg)', pesoController, TextInputType.datetime, status),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 10),
                     ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        var imc = double.parse(pesoController.text) / (double.parse(alturaController.text) * double.parse(alturaController.text));
+                        setState(() {
+                          resultadoController.text = imc.toStringAsFixed(2);
+                          if (imc < 18.6) {
+                            _result = 'Abaixo do peso';
+                          } else if (imc < 25.0) {
+                            _result = "Peso ideal";
+                          } else if (imc < 30.0) {
+                            _result = "Levemente acima do peso";
+                          } else if (imc < 35.0) {
+                            _result = "Obesidade Grau I";
+                          } else if (imc < 40.0) {
+                            _result = "Obesidade Grau II";
+                          } else {
+                            _result = "Obesidade Grau IIII";
+                          }
+                        });
+                      },
                       icon: Image.asset('images/calc.png', width: 15),
                       label: Text('Calcular'),
                       style: ElevatedButton.styleFrom(
@@ -89,8 +101,18 @@ class _IMCState extends State<IMC> {
                     Container(
                       width: 200,
                       padding: EdgeInsets.only(left: 10, right: 10),
-                      child: DefaultTextFieldProfileBlack('Resultado', emailController, TextInputType.text, status),
+                      child: DefaultTextFieldProfileBlack('Resultado', resultadoController, TextInputType.text, false),
                     ),
+                    _result.isEmpty
+                        ? SizedBox(height: 0)
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _result,
+                              style: TextStyle(color: Colors.lightBlueAccent, fontSize: 28, fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -104,19 +126,12 @@ class _IMCState extends State<IMC> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Peso ideal 68,60Kg",
-                        style: TextStyle(color: Color(0xFF1D3557), fontSize: 28, fontWeight: FontWeight.w500),
+                        'Fique Atento',
+                        style: TextStyle(color: Color(0xFF1D3557), fontSize: 24, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "(Colocar Escala)",
-                        style: TextStyle(color: Color(0xFF1D3557), fontSize: 18, fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    Padding(padding: const EdgeInsets.all(8.0), child: Image.asset('images/escala.jpg')),
                   ],
                 ),
               ),
@@ -133,7 +148,7 @@ class _IMCState extends State<IMC> {
                     ),
                   ),
                   width: MediaQuery.of(context).size.width,
-                  height: 350,
+                  height: 240,
                   child: Padding(
                     padding: const EdgeInsets.all(25.0),
                     child: Column(

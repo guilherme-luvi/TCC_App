@@ -10,7 +10,6 @@ class MinhaConta extends StatefulWidget {
 
 class _MinhaContaState extends State<MinhaConta> {
   bool status = true;
-  bool _showPassword = false;
   bool showProgress = false;
 
   // UserWebClient _webClient = UserWebClient();
@@ -61,6 +60,10 @@ class _MinhaContaState extends State<MinhaConta> {
             ),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
+              child: DefaultTextFieldProfileBlack('E-mail', emailController, TextInputType.text, status),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10),
               child: DefaultTextFieldProfileBlack(
                 'CPF',
                 documentController,
@@ -89,10 +92,6 @@ class _MinhaContaState extends State<MinhaConta> {
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: DefaultTextFieldProfileBlack('Celular', emailController, TextInputType.text, status),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: DefaultTextFieldProfileBlack('E-mail', emailController, TextInputType.text, status),
             ),
           ],
         ),
